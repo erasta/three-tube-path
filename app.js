@@ -19,11 +19,13 @@ const gui = new GUI();
 
 const params = {
     radialSegments: 8,
+    wireframe: true,
 };
 
 gui.add(params, 'radialSegments').min(3).max(24).step(1).onChange(recreate);
+gui.add(params, 'wireframe').onChange(v => tube.wire.visible = v);
 
-const tube = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: 'green' }));
+const tube = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: 'green', side: THREE.DoubleSide }));
 scene.add(tube);
 
 function recreate() {
