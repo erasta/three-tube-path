@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
-import { TubeGeometry } from './TubeGeometry.js';
+import { TubePath } from './TubePath.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -50,7 +50,7 @@ console.log(lengths);
 const uMappingFrames = lengths.map(l => l / lengths.at(-1));
 console.log(uMappingFrames);
 // const geometry1 = new THREE.TubeGeometry(path, 1, 1, 3, true);
-const geometry = new TubeGeometry(path, uMappingFrames, 1, 8, false);
+const geometry = new TubePath(path, uMappingFrames, 1, 8, false);
 
 // console.log( 'org', geometry1.index.array);
 // console.log( 'new', geometry.index.array);

@@ -8,7 +8,13 @@ import {
 	Vector3
 } from 'three';
 
-class TubeGeometry extends BufferGeometry {
+/**
+ * Forked from TubeGeometry on three.js
+ * @link https://github.com/mrdoob/three.js/blob/master/src/geometries/TubeGeometry.js
+ *
+ * Also adapted Curve.computeFrenetFrames() to use u-mapping
+ */
+export class TubePath extends BufferGeometry {
 
 	constructor(path = new QuadraticBezierCurve3(new Vector3(- 1, - 1, 0), new Vector3(- 1, 1, 0), new Vector3(1, 1, 0)),
 		uMappingFrames = Array(64).fill().map((x, i, arr) => i / (arr.length - 1)),
@@ -18,7 +24,7 @@ class TubeGeometry extends BufferGeometry {
 
 		super();
 
-		this.type = 'TubeGeometry';
+		this.type = 'TubePath';
 
 		this.parameters = {
 			path: path,
@@ -301,9 +307,9 @@ class TubeGeometry extends BufferGeometry {
 
 		// This only works for built-in curves (e.g. CatmullRomCurve3).
 		// User defined curves or instances of CurvePath will not be deserialized.
-		return new TubeGeometry(
+		return new TubePath(
 			new Curves[ data.path.type ]().fromJSON( data.path ),
-			data.tubularSegments,
+			data.uMappingFrames,
 			data.radius,
 			data.radialSegments,
 			data.closed
@@ -312,6 +318,3 @@ class TubeGeometry extends BufferGeometry {
 	}
 
 }
-
-
-export { TubeGeometry };
