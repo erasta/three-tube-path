@@ -3,14 +3,14 @@ import {
 	Float32BufferAttribute,
 	MathUtils,
 	Matrix4,
+	QuadraticBezierCurve3,
 	Vector2,
 	Vector3
 } from 'three';
-import * as Curves from '../node_modules/three/src/extras/curves/Curves.js';
 
 class TubeGeometry extends BufferGeometry {
 
-	constructor(path = new Curves['QuadraticBezierCurve3'](new Vector3(- 1, - 1, 0), new Vector3(- 1, 1, 0), new Vector3(1, 1, 0)),
+	constructor(path = new QuadraticBezierCurve3(new Vector3(- 1, - 1, 0), new Vector3(- 1, 1, 0), new Vector3(1, 1, 0)),
 		uMappingFrames = Array(64).fill().map((x, i, arr) => i / (arr.length - 1)),
 		radius = 1,
 		radialSegments = 8,
