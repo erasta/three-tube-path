@@ -19,10 +19,16 @@ const gui = new GUI();
 
 const params = {
     radialSegments: 8,
+    elbowNum: 2,
+    elbowOffset: 0.1,
+    radius: 1,
     wireframe: true,
 };
 
 gui.add(params, 'radialSegments').min(3).max(24).step(1).onChange(recreate);
+gui.add(params, 'elbowNum').name('elbowSegmentNum').min(0).max(10).step(1).onChange(recreate);
+gui.add(params, 'elbowOffset').name('elbowOffSegmentset').min(0.01).max(1).step(0.01).onChange(recreate);
+gui.add(params, 'radius').min(0.1).max(5).step(0.01).onChange(recreate);
 gui.add(params, 'wireframe').onChange(v => tube.wire.visible = v);
 
 const tube = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: 'green', side: THREE.DoubleSide }));
@@ -36,9 +42,10 @@ function recreate() {
         new THREE.Vector3(5, -5, 5),
         new THREE.Vector3(10, 0, 10)
     ], false, 'chordal');
-    tube.geometry = new TubePath(path, undefined, 1, params.radialSegments, false);
+    tube.geometry = new TubePath(path, TubePath.pathToUMapping(path, params.elbowNum, params.elbowOffset), params.radius, params.radialSegments, false);
     if (!tube.wire) {
         tube.wire = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 'cyan' }));
+        tube.wire.visible = params.wireframe;
         tube.add(tube.wire);
     }
     tube.wire.geometry = new THREE.WireframeGeometry(tube.geometry);
