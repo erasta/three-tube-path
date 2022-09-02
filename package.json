@@ -3,6 +3,7 @@
     "three": "^0.144.0"
   },
   "devDependencies": {
+    "@types/three": "^0.144.0",
     "serve": "^14.0.1"
   }
 }
