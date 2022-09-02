@@ -1,24 +1,25 @@
 import {
 	BufferGeometry,
+	CatmullRomCurve3,
 	Float32BufferAttribute,
 	MathUtils,
 	Matrix4,
-	QuadraticBezierCurve3,
 	Vector2,
 	Vector3
 } from 'three';
 
 /**
- * Forked from TubeGeometry on three.js
+ * Forked from TubeGeometry on three.js to expose u-Mapping param
  * @link https://github.com/mrdoob/three.js/blob/master/src/geometries/TubeGeometry.js
  *
  * Also adapted Curve.computeFrenetFrames() to use u-mapping
  */
 export class TubePath extends BufferGeometry {
 
-	constructor(path = new QuadraticBezierCurve3(new Vector3(- 1, - 1, 0), new Vector3(- 1, 1, 0), new Vector3(1, 1, 0)),
-		uMappingFrames = Array(64).fill().map((x, i, arr) => i / (arr.length - 1)),
-		radius = 1,
+ 	constructor(
+		path = new CatmullRomCurve3([ new Vector3(- 1, - 1, 0), new Vector3(- 1, 1, 0), new Vector3(1, 1, 0) ]),
+		uMappingFrames = undefined,
+		radius = 0.3,
 		radialSegments = 8,
 		closed = false) {
 
@@ -33,6 +34,10 @@ export class TubePath extends BufferGeometry {
 			radialSegments: radialSegments,
 			closed: closed
 		};
+
+		if (!uMappingFrames) {
+			uMappingFrames = TubePath.pathToUMapping(path, 2, 0.1);
+		}
 
 		const frames = this.computeFrenetFrames( path, uMappingFrames, closed );
 
@@ -314,6 +319,38 @@ export class TubePath extends BufferGeometry {
 			data.radialSegments,
 			data.closed
 		);
+
+	}
+
+	static pathToUMapping(
+		path = new CatmullRomCurve3([ new Vector3(- 1, - 1, 0), new Vector3(- 1, 1, 0), new Vector3(1, 1, 0) ]),
+		elbowSegmentNum = 2,
+		elbowSegmentOffset = 0.1) {
+
+		const lengths = [0];
+		path.points.forEach((p, i, arr) => {
+			if (i > 0) {
+				const last = lengths.at(-1);
+				const dist = p.distanceTo(arr[i - 1]);
+				const next = last + dist;
+				const numElbow = Math.min(elbowSegmentNum, dist / 2 / elbowSegmentOffset - 1);
+				if (i > 1) {
+					for (let j = 1; j <= numElbow; ++j) {
+						lengths.push(last + j * elbowSegmentOffset);
+					}
+				}
+				if (i < arr.length - 1) {
+					for (let j = numElbow; j >= 1; --j) {
+						lengths.push(next - j * elbowSegmentOffset);
+					}
+				}
+				lengths.push(next);
+			}
+		});
+
+		const uMappingFrames = lengths.map(l => l / lengths.at(-1));
+
+		return uMappingFrames;
 
 	}
 
