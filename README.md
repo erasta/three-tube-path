@@ -11,7 +11,7 @@ const geometry = new TubePath(path, TubePath.pathToUMapping(path, 3, 0.3), 1, 8,
 const tube = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 'green' }));
 scene.add(tube);
 ```
-### `geometry = new TubePath(path, uMappingFrames, radius, radialSegments, closed)`
+#### `geometry = new TubePath(path, uMappingFrames, radius, radialSegments, closed)`
 Creates a geometry like TubeGeometry for three.js, but instead of uniformly picking points for tubular segments, allows using specific points or spreading a few just around the path original points.
 - `path` - (Curve) A 3D path that inherits from the Curve base class.
 - `uMappingFrames` - (Vector of Float) - Positions on the path to place tubular points, where 0 is the beginning of the path and 1 is its end. Default is a few positions around each original point, obtained from calling `TubePath.pathToUMapping(path)`, see below.
@@ -19,11 +19,17 @@ Creates a geometry like TubeGeometry for three.js, but instead of uniformly pick
 - `radialSegments` — (Integer) The number of segments that make up the cross-section. Default is 8.
 - `closed` — (Boolean) Is the tube open or closed. Default is false.
 
-### `umap = TubePath.pathToUMapping(path, elbowNum, elbowOffset)`
+#### `umap = TubePath.pathToUMapping(path, elbowNum, elbowOffset)`
 Utility function for positions mapping for a path, spreading a few points around each original path point, to smooth those elbows.
 - `path` - (Curve) A 3D path that inherits from the Curve base class. Same as given to the TubePath constructor.
 - `elbowNum` - (Integer) Maximum number of positions to place on each side of an elbow. Default is 2.
 - `elbowOffset` - (Float) Distance between one position around an elbow and the next. Default is 0.1.
+
+#### Alternative for CylinderGeometry
+To create an oriented cylinder geometry between two arbitrary points `[p0, p1]` use:
+```js
+const cylinder = new THREE.Mesh(new TubePath(new THREE.CatmullRomCurve3([p0, p1]), [0, 1], radius, radialSegments));
+```
 
 ## Install
 ```sh
