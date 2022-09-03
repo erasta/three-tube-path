@@ -5,5 +5,25 @@
   "devDependencies": {
     "@types/three": "^0.144.0",
     "serve": "^14.0.1"
-  }
+  },
+  "name": "three-tube-path",
+  "description": "Create a three.js like TubeGeometry with just as many tubular segments as needed",
+  "version": "1.0.0",
+  "main": "TubePath.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erasta/three-tube-path.git"
+  },
+  "keywords": [
+    "threejs"
+  ],
+  "author": "erasta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/erasta/three-tube-path/issues"
+  },
+  "homepage": "https://github.com/erasta/three-tube-path#readme"
 }
