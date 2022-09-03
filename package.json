@@ -8,7 +8,7 @@
   },
   "name": "three-tube-path",
   "description": "TubeGeometry for three.js with just as many tubular segments as needed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "TubePath.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
