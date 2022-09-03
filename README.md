@@ -1,7 +1,7 @@
 # three-tube-path
 TubeGeometry for three.js with just as many tubular segments as needed.
 
-[![NPM Package][npm]][npm-url]
+![npm](https://img.shields.io/npm/v/three-tube-path?style=plastic)
 
 # Demo
 https://erasta.github.io/three-tube-path
