@@ -1,8 +1,9 @@
 # three-tube-path
 TubeGeometry for three.js with just as many tubular segments as needed.
+
 ![npm](https://img.shields.io/npm/v/three-tube-path?style=plastic)
 
-# Usage
+## Usage
 ```js
 import { TubePath } from 'three-tube-path';
 const path = new THREE.CatmullRomCurve3([new THREE.Vector3(-5, -5, 0), new THREE.Vector3(-5, 5, 0), new THREE.Vector3(5, 5, 0)]);
@@ -16,7 +17,7 @@ scene.add(tube);
 npm install three-tube-path --save
 ```
 
-# Demo
+## Demo
 https://erasta.github.io/three-tube-path
 
 <img src="files/ScreenShot.png" width=500/>
