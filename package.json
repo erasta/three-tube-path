@@ -7,7 +7,7 @@
     "serve": "^14.0.1"
   },
   "name": "three-tube-path",
-  "description": "Create a three.js like TubeGeometry with just as many tubular segments as needed",
+  "description": "TubeGeometry for three.js with just as many tubular segments as needed",
   "version": "1.0.0",
   "main": "TubePath.js",
   "scripts": {
@@ -18,7 +18,9 @@
     "url": "git+https://github.com/erasta/three-tube-path.git"
   },
   "keywords": [
-    "threejs"
+    "threejs",
+    "javascript",
+    "3d"
   ],
   "author": "erasta",
   "license": "MIT",
