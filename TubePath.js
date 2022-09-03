@@ -36,7 +36,7 @@ export class TubePath extends BufferGeometry {
 		};
 
 		if (!uMappingFrames) {
-			uMappingFrames = TubePath.pathToUMapping(path, 2, 0.1);
+			uMappingFrames = TubePath.pathToUMapping(path);
 		}
 
 		const frames = this.computeFrenetFrames( path, uMappingFrames, closed );
