@@ -1,8 +1,8 @@
 import * as THREE from 'three';
-import { RoomEnvironment } from './node_modules/three/examples/jsm/environments/RoomEnvironment.js';
-import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
-import { TubePath } from './TubePath.js';
-import { GUI } from './node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
+import { RoomEnvironment } from 'three/addon/environments/RoomEnvironment.js';
+import { OrbitControls } from 'three/addon/controls/OrbitControls.js';
+import { GUI } from 'three/addon/libs/lil-gui.module.min.js';
+import { TubePath } from '../TubePath.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
