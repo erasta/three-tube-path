@@ -21,10 +21,29 @@
     #controls label { display: flex; align-items: center; gap: 6px; }
     #controls input[type=range] { width: 100px; }
     #controls button { margin-top: 4px; cursor: pointer; }
+    #header {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      font-family: sans-serif;
+      z-index: 999;
+      pointer-events: none;
+    }
+    #header h1 { font-size: 18px; margin: 0; }
+    #header p { font-size: 12px; margin: 2px 0 0; opacity: 0.8; }
   </style>
 </head>
 
 <body>
+  <div id="header">
+    <h1>three-tube-path</h1>
+    <p>TubeGeometry for three.js with just as many tubular segments as needed</p>
+  </div>
+
   <div id="controls">
     <label>Points <input type="range" id="numberOfPoints" min="2" max="10" step="1" value="5"><span id="numberOfPoints-val">5</span></label>
     <label>Radial <input type="range" id="radialSegments" min="3" max="24" step="1" value="8"><span id="radialSegments-val">8</span></label>
@@ -38,9 +57,10 @@
   <script type="module" src="app.ts"></script>
 
   <a id="button" target="_blank" style="position: fixed; bottom: 16px; right: 16px; padding: 12px; border-radius: 50%;
-     background-color: #FFF; opacity: .9; z-index: 999; box-shadow: 0 0 4px rgb(0 0 0 / 15%); text-decoration: none;"
-    href="https://github.com/erasta/three-tube-path/blob/main/demo/app.ts" title="View source code on GitHub">
-    <img src="../files/ic_code_black_24dp.svg" />
+     background-color: #FFF; opacity: .9; z-index: 999; box-shadow: 0 0 4px rgb(0 0 0 / 15%); text-decoration: none;
+     display: flex; align-items: center; justify-content: center;"
+    href="https://github.com/erasta/three-tube-path" title="View on GitHub">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
   </a>
 </body>
 
