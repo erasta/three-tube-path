@@ -10,7 +10,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepack": "npm run build",
+    "postpublish": "git tag v$npm_package_version && git push origin v$npm_package_version"
   },
   "dependencies": {
     "three": "^0.144.0"

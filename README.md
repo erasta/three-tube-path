@@ -5,7 +5,7 @@ TubeGeometry for three.js with just as many tubular segments as needed.
 
 ## Usage
 
-```js
+```ts
 import { TubePath } from 'three-tube-path';
 const path = new THREE.CatmullRomCurve3([new THREE.Vector3(-5, -5, 0), new THREE.Vector3(-5, 5, 0), new THREE.Vector3(5, 5, 0)]);
 const geometry = new TubePath(path, TubePath.pathToUMapping(path, 3, 0.3), 1, 8, false);
@@ -34,7 +34,7 @@ const cylinder = new THREE.Mesh(new TubePath(new THREE.CatmullRomCurve3([p0, p1]
 
 ## Install
 ```sh
-npm install three-tube-path --save
+npm install three-tube-path
 ```
 
 ## Demo
@@ -44,4 +44,4 @@ https://erasta.github.io/three-tube-path
 
 ## License
 
-MIT, see [LICENSE](http://github.com/erasta/three-tube-path/blob/master/LICENSE) for details.
+MIT, see [LICENSE](https://github.com/erasta/three-tube-path/blob/main/LICENSE) for details.
