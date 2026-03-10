@@ -1,8 +1,8 @@
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addon/environments/RoomEnvironment.js';
-import { OrbitControls } from 'three/addon/controls/OrbitControls.js';
-import { GUI } from 'three/addon/libs/lil-gui.module.min.js';
-import { TubePath } from '../TubePath.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GUI } from 'lil-gui';
+import { TubePath } from 'three-tube-path';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -28,22 +28,23 @@ const params = {
     wireframe: true,
 };
 
-gui.add(params, 'numberOfPoints').min(2).max(10).step(1).onChange(v => v !== points.length && randomize());
+gui.add(params, 'numberOfPoints').min(2).max(10).step(1).onChange((v: number) => v !== points.length && randomize());
 gui.add(params, 'radialSegments').min(3).max(24).step(1).onChange(recreate);
 gui.add(params, 'elbowNum').name('elbowSegmentNum').min(0).max(10).step(1).onChange(recreate);
 gui.add(params, 'elbowOffset').name('elbowOffSegmentset').min(0.01).max(1).step(0.01).onChange(recreate);
 gui.add(params, 'radius').min(0.1).max(5).step(0.01).onChange(recreate);
-gui.add(params, 'wireframe').onChange(v => tube.wire.visible = v);
+gui.add(params, 'wireframe').onChange((v: boolean) => { if (wire) wire.visible = v; });
 
 const tube = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: 'green', side: THREE.DoubleSide }));
 scene.add(tube);
 
+let wire: THREE.LineSegments | undefined;
 
 function randomize() {
     points = [new THREE.Vector3()];
     for (let i = 1; i < params.numberOfPoints; ++i) {
         const dir = new THREE.Vector3().randomDirection().multiplyScalar(5);
-        points.push(dir.add(points.at(-1)));
+        points.push(dir.add(points[points.length - 1]));
     }
     recreate();
 }
@@ -51,12 +52,12 @@ function randomize() {
 function recreate() {
     const path = new THREE.CatmullRomCurve3(points, false, 'chordal');
     tube.geometry = new TubePath(path, TubePath.pathToUMapping(path, params.elbowNum, params.elbowOffset), params.radius, params.radialSegments, false);
-    if (!tube.wire) {
-        tube.wire = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 'cyan' }));
-        tube.wire.visible = params.wireframe;
-        tube.add(tube.wire);
+    if (!wire) {
+        wire = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 'cyan' }));
+        wire.visible = params.wireframe;
+        tube.add(wire);
     }
-    tube.wire.geometry = new THREE.WireframeGeometry(tube.geometry);
+    wire.geometry = new THREE.WireframeGeometry(tube.geometry);
 }
 
 recreate();
@@ -64,6 +65,6 @@ recreate();
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-};
+}
 
 animate();

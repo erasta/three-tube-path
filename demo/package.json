@@ -1,0 +1,19 @@
+{
+  "name": "three-tube-path-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "three": "^0.144.0",
+    "three-tube-path": "file:.."
+  },
+  "devDependencies": {
+    "@types/three": "^0.144.0",
+    "lil-gui": "^0.17.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
+  }
+}

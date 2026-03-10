@@ -2,3 +2,7 @@ node_modules/
 *.tgz
 .github/
 files/
+demo/
+*.ts
+!*.d.ts
+tsconfig.json
