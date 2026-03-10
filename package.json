@@ -1,7 +1,7 @@
 {
   "name": "three-tube-path",
   "description": "TubeGeometry for three.js with just as many tubular segments as needed",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "type": "module",
   "main": "dist/TubePath.js",
   "types": "dist/TubePath.d.ts",
